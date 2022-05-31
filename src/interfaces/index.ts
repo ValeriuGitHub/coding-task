@@ -1,4 +1,4 @@
-export interface bmi {
+export interface IBmi {
   id: string;
   name: string;
   height: number;

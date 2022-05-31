@@ -1,24 +1,30 @@
 <template>
-  <div class="bmi__card" :class="{ highlight: counter >= 10 }">
+  <div class="bmi__card" :class="{ highlight: votes >= 10 }">
     <div class="bmi__text bmi__name">{{ bmi.name }}</div>
     <div class="bmi__text bmi__height">Height: {{ bmi.height }}</div>
     <div class="bmi__text bmi__width">Width: {{ bmi.weight }}</div>
-    <div class="bmi__text bmi__counter" @click="counter++">
-      Vote: {{ counter }}
-    </div>
+
+    <div class="bmi__text bmi__counter" @click="votes++">Vote: {{ votes }}</div>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { PropType, defineComponent } from "vue";
+
+import { IBmi } from "@/interfaces";
+
+export default defineComponent({
   props: {
-    bmi: Object,
+    bmi: {
+      type: Object as PropType<IBmi>,
+      required: true,
+    },
   },
 
   data: () => ({
-    counter: 0,
+    votes: 0,
   }),
-};
+});
 </script>
 
 <style lang="scss" scoped>
@@ -59,10 +65,10 @@ export default {
   &__text {
     font-family: "Arial";
   }
+}
 
-  .highlight {
-    background: cornflowerblue;
-    color: white;
-  }
+.highlight {
+  background: cornflowerblue;
+  color: white;
 }
 </style>

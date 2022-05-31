@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
+
 const routes = [
   {
     path: "/",
@@ -6,14 +7,16 @@ const routes = [
     name: "bmi-list",
     component: () => import("./components/BmiList.vue"),
   },
-  //   {
-  //     path: "/add",
-  //     name: "add",
-  //     component: () => import("./components/AddBmi.vue"),
-  //   },
+  {
+    path: "/add",
+    name: "addBmi",
+    component: () => import("./components/AddBmi.vue"),
+  },
 ];
+
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
 export default router;

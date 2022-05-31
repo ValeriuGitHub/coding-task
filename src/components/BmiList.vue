@@ -1,18 +1,20 @@
 <template>
-  <div class="bmi">
-    <ItemOfBmi v-for="bmi in sortBmiByHeight()" :key="bmi.id" :bmi="bmi" />
+  <div class="bmi-list">
+    <BmiCard v-for="bmi in sortBmiByHighest()" :key="bmi.id" :bmi="bmi" />
   </div>
 </template>
 <script>
-import ItemOfBmi from "./ItemOfBmi.vue";
+import BmiCard from "./BmiCard.vue";
 
-import BmiService from "../services/BmiService";
+import { IBmi } from "@/interfaces";
+
+import BmiGateway from "../gateway/BmiGateway";
 
 export default {
   name: "bmi-list",
 
   components: {
-    ItemOfBmi,
+    BmiCard,
   },
 
   data: () => ({
@@ -20,20 +22,23 @@ export default {
   }),
 
   async mounted() {
-    this.bmis = await BmiService.getAll();
+    this.bmis = await BmiGateway.getAll();
   },
 
   methods: {
-    sortBmiByHeight() {
-      return this.bmis.sort((firstBmi, secondBmi) => {
-        firstBmi.height - secondBmi.height;
-      });
+    sortBmiByHighest() {
+      const calculateBmi = (bmi) => bmi.weight / Math.sqrt(bmi.height);
+
+      return this.bmis.sort(
+        (firstBmi, secondBmi) =>
+          calculateBmi(secondBmi) - calculateBmi(firstBmi)
+      );
     },
   },
 };
 </script>
 <style>
-.bmi {
+.bmi-list {
   display: flex;
   flex-wrap: wrap;
   margin: 0px -10px;
