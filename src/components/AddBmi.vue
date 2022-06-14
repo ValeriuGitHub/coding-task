@@ -1,7 +1,12 @@
 <template>
   <div class="add">
     <div class="add__text">Name:</div>
-    <input class="add__input" v-model="bmi.name" type="text" />
+    <input
+      class="add__input name__input"
+      v-model="bmi.name"
+      type="text"
+      required
+    />
 
     <div class="add__text">Height:</div>
     <input class="add__input" v-model="bmi.height" type="number" />
@@ -9,7 +14,9 @@
     <div class="add__text">Weight:</div>
     <input class="add__input" v-model="bmi.weight" type="number" />
 
-    <div @click="addBmi" class="add__text add__btn">Add BMI</div>
+    <button @click="addBmi" :disabled="!bmi.name" class="add__text add__btn">
+      Add BMI
+    </button>
   </div>
 </template>
 

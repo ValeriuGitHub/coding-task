@@ -21,6 +21,12 @@ export default defineComponent({
     },
   },
 
+  watch: {
+    votes() {
+      if (this.votes >= 10) this.votes = 10;
+    },
+  },
+
   data: () => ({
     votes: 0,
   }),

@@ -3,10 +3,9 @@
     <BmiCard v-for="bmi in sortBmiByHighest()" :key="bmi.id" :bmi="bmi" />
   </div>
 </template>
+
 <script>
 import BmiCard from "./BmiCard.vue";
-
-import { IBmi } from "@/interfaces";
 
 import BmiGateway from "../gateway/BmiGateway";
 

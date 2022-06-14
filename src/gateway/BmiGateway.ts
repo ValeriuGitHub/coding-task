@@ -3,7 +3,7 @@ import { db } from "../firebase";
 import { IBmi } from "@/interfaces";
 
 class BmiGateway {
-  getAll() {
+  getAll(): Promise<IBmi[]> {
     return db
       .collection("bmi")
       .get()
@@ -13,7 +13,7 @@ class BmiGateway {
           ...doc.data(),
         }));
 
-        return data;
+        return data as IBmi[];
       });
   }
 
